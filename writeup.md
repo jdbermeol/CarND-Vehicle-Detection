@@ -13,11 +13,11 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/car.png
 [image2]: ./output_images/no-car.png
 [image3]: ./output_images/hog.png
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+[image4]: ./output_images/Final.png
+[image5]: ./output_images/heatmap.png
+[image6]: ./output_images/labelmap.png
+[image7]: ./output_images/rectangles.png
+[image8]: ./output_images/rectangles2.png
 
 ### Histogram of Oriented Gradients (HOG)
 
@@ -49,21 +49,17 @@ I trained a linear SVM doing a 3-fold cross validation evaluating different valu
 
 ### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 Code is in Detect vehicles.ipynb. I decided to search random window positions at random scales all over the image.
 
-TODO
-
-![alt text][image3]
+![alt text][image7]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on four scales (1, 1.5, 2, 3.5) on different windows using HLS 3-channel HOG features plus HSV histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on four scales (1, 1.5, 2, 3.5) on different windows using HLS 3-channel HOG features plus HSV histograms of color in the feature vector, which provided a nice result.
 
-TODO
-
-![alt text][image4]
+![alt text][image8]
 ---
 
 ### Video Implementation
@@ -80,26 +76,32 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ### Here are frames and their corresponding heatmaps:
 
-TODO
-
 ![alt text][image5]
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap:
-
-TODO
 
 ![alt text][image6]
 
 ### Here the resulting bounding boxes:
 TODO
 
-![alt text][image7]
+![alt text][image4]
 
 ---
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Current implementation has several potential issues.
+
+1. Even though accuracy is around 97%, it means model misclassify several windows, and a threshold strategy is not robust enough, it would be good to find a more accurate(around 99%) model.
+
+2. Sliding window search resolution is not high enough, small cars are going to have issues as overlapping is not okay. Increase resolution would help overall accuracy.
+
+3. Each frame analysis is expensive, implement and strategy to take the previous frames detections would help to improve performance and efficiency.
+
+4. Classification model(Linear SVM) requires a small dataset to be trained. This is an issue when new samples not similar to the training dataset happens. A model that can learn from a huge dataset would be better.
+
+5. Detection is slow, and several things can be parallelized and it should. 
 
