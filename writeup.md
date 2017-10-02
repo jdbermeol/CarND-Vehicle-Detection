@@ -1,8 +1,3 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Vehicle Detection Project**
 
 The goals / steps of this project are the following:
@@ -24,40 +19,37 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+### Histogram of Oriented Gradients (HOG)
 
----
-###Writeup / README
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
+The code for this step is contained from cell 1 to 20.
 
-You're reading it!
+Cells 1 and 2 define basic imports and a unify way to read images from files across the code.
 
-###Histogram of Oriented Gradients (HOG)
+Then I started by reading in all the `vehicle` and `non-vehicle` images, cell 3.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
-
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
-
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+TODO 
 
 ![alt text][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+Cell 4 sfuggles the data, cell 5 display class size to evaluate class invalance. Cell 6 Split on train and test dataset.
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). Here is an example using the `HLS` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
+TODO 
 
 ![alt text][image2]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters , number of bins for color histogram, number of orientations, and cell size. At the end the feature selection was done measuring the f1-score(robust measure against class imbalance) of a Linear SVM with a 3-fold cross validation.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+I discarded RGB color space, for its undesirable properties under changing light conditions. I deside to use HSV sapce for color features and HLS space for shape features.
 
-I trained a linear SVM using...
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+
+I trained a linear SVM doing a 3-fold cross validation evaluating different values for parameter C. Code goes from cell 21 to 28. Final test accuracy was 97% and 0.97 f1-score.
 
 ###Sliding Window Search
 
