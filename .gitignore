@@ -1,0 +1,5 @@
+.ipynb_checkpoints/
+model.pkl
+.DS_Store
+data
+checkpoints
