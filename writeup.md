@@ -10,9 +10,9 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
+[image1]: ./output_images/car.png
+[image2]: ./output_images/no-car.png
+[image3]: ./output_images/hog.png
 [image4]: ./examples/sliding_window.jpg
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
@@ -27,19 +27,15 @@ The code for this step is contained from cell 1 to 20.
 
 Cells 1 and 2 define basic imports and a unify way to read images from files across the code.
 
-Then I started by reading in all the `vehicle` and `non-vehicle` images, cell 3.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+Then I started by reading in all the `vehicle` and `non-vehicle` images, cell 3.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes: 
 
-TODO 
-
-![alt text][image1]
+![alt text][image1] ![alt text][image2]
 
 Cell 4 sfuggles the data, cell 5 display class size to evaluate class invalance. Cell 6 Split on train and test dataset.
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). Here is an example using the `HLS` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`). Here is an example using the `HLS` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`: 
 
-TODO 
-
-![alt text][image2]
+![alt text][image3]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
